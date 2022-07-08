@@ -1,0 +1,60 @@
+<div class="content">
+    <form [formGroup]="loginForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input style="width: 100%;"
+                    matInput
+                    formControlName="username"
+                    placeholder="ex. abcd098">
+            <mat-error *ngIf="username.errors?.['maxlength'] || false">
+                Username cannot exceed 15 characters
+            </mat-error>
+            <mat-error *ngIf="username.errors?.['required']">
+                Username is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Email Address</mat-label>
+            <input style="width: 100%;"
+                    matInput
+                    formControlName="email"
+                    placeholder="ex. john.a.seed@email.com">
+            <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+                Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="email.hasError('required')">
+                Email address is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input style="width: 100%;"
+                    matInput
+                    type="password"
+                    formControlName="password"
+                    placeholder="ex. Seed">
+            <mat-error *ngIf="password.hasError('required')">
+                A password is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Confirm Password</mat-label>
+            <input style="width: 100%;"
+                    matInput
+                    type="password"
+                    formControlName="confirm"
+                    placeholder="ex. Seed">
+            <mat-error *ngIf="confirm.hasError('required')">
+                A confirm password is required
+            </mat-error>
+            <mat-error *ngIf="confirm.hasError('passwordCheck')">
+                Password and Confirm Password must match.
+            </mat-error>
+        </mat-form-field>
+        <button mat-raised-button
+            [disabled]="!loginForm.valid"
+            (click)="submit()">
+            submit
+        </button>
+    </form>
+</div>
